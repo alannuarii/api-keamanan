@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const photoTraining = require("./controller/photoTraining");
 const patroli = require("./controller/patroli");
 const presensi = require("./controller/presensi");
 const tamu = require("./controller/tamu");
@@ -17,7 +16,5 @@ router.get("/get/presensi/get-piket/:data", presensi.getPiket);
 // Tamu
 router.post("/post/tamu/insert-tamu", tamu.insertTamu);
 
-router.get("/get/photo-training", photoTraining.getPhotos);
-router.delete("/delete/photo-training", photoTraining.deletePhoto);
 
 module.exports = router;
