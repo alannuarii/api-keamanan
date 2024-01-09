@@ -1,4 +1,5 @@
 const db = require("../db/connection");
+const { message } = require('../utils/mq')
 
 const { promisify } = require("util");
 const dbQuery = promisify(db.query).bind(db);
@@ -13,6 +14,9 @@ const insertTamu = async (req, res) => {
     await dbQuery(sql, values);
     await convertBase64ToFile(foto, targetDir, fileName);
     res.status(200).json({ message: "Berhasil", data: { nama } });
+    message('keamanan', 'tamu', {
+      nama, instansi, nohp, tujuan, item: 'tamu'
+    })
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Gagal input data", data: [] });
