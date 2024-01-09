@@ -1,5 +1,6 @@
 const db = require("../db/connection");
 const path = require("path");
+const { convertBase64ToFile } = require("../utils/convertImg");
 const { message } = require('../utils/mq')
 
 const { promisify } = require("util");
