@@ -9,7 +9,7 @@ const insertTamu = async (req, res) => {
   try {
     const { foto, nama, instansi, nohp, tujuan } = req.body;
     const targetDir = path.join(__dirname, "..", "static", "img", "tamu");
-    const fileName = `${nama.replace(/ /g, "")}-${new Date(waktu).getTime()}.jpeg`;
+    const fileName = `${nama.replace(/ /g, "")}-${new Date().getTime()}.jpeg`;
     const sql = "INSERT INTO tamu (nama, instansi, nohp, tujuan, foto) VALUES (?, ?, ?, ?, ?)";
     const values = [nama, instansi, nohp, tujuan, fileName];
     await dbQuery(sql, values);
