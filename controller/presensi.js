@@ -1,4 +1,5 @@
 const db = require("../db/connection");
+const { message } = require('../utils/mq')
 
 const { promisify } = require("util");
 const dbQuery = promisify(db.query).bind(db);
@@ -10,6 +11,9 @@ const insertPresensi = async (req, res) => {
     const values = [nama, waktu, shift];
     await dbQuery(sql, values);
     res.status(200).json({ message: "Berhasil", data: values });
+    message('keamanan', 'presensi', {
+      nama, shift, waktu, item: 'presensi'
+    })
   } catch (error) {
     console.error("Kesalahan koneksi ke database:", error);
     res.status(500).json({ message: "Gagal input data", data: [] });
